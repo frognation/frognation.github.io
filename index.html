@@ -148,84 +148,77 @@
       </div>
     </header>
 
-    <section class="grid">
+    <section class="grid" id="projects">
       <article class="card">
-        <h3>ANAcycle-2</h3>
-        <p>두 번째 ANAcycle 업데이트. 세부 내용은 리포지토리에서 확인하세요.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/ANAcycle-2" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>anacycle-media-downloader</h3>
-        <p>미디어 다운로드 스크립트 모음.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/anacycle-media-downloader" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>calligrapher-ai</h3>
-        <p>RNN 기반 필기체 합성 실험.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/calligrapher-ai" target="_blank" rel="noopener">GitHub</a>
-          <a class="pill" href="https://girkovarpa.itch.io/calligrapher-ai" target="_blank" rel="noopener">라이브 보기</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>interactive</h3>
-        <p>rosa's class 과제와 인터랙션 실험.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/interactive" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>Jisung_Interview</h3>
-        <p>지성 인터뷰 자료.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/Jisung_Interview" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>Optimistic_Typeface</h3>
-        <p>타입페이스 실험과 모핑 비교 툴.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/Optimistic_Typeface" target="_blank" rel="noopener">GitHub</a>
-          <a class="pill" href="https://morph-compare.vercel.app" target="_blank" rel="noopener">라이브 보기</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>pix2pix</h3>
-        <p>conditional GAN 기반 이미지 투 이미지 변환 코드.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/pix2pix" target="_blank" rel="noopener">GitHub</a>
-          <a class="pill" href="https://phillipi.github.io/pix2pix/" target="_blank" rel="noopener">원본 데모</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>ReactionDiffusionSimulator</h3>
-        <p>튜링 패턴 리액션-디퓨전 시뮬레이터.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/ReactionDiffusionSimulator" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>Thrasher-Haloween</h3>
-        <p>할로윈 테마의 웹 프로젝트.</p>
-        <div class="links">
-          <a class="pill accent" href="https://github.com/frognation/Thrasher-Haloween" target="_blank" rel="noopener">GitHub</a>
-        </div>
+        <h3>불러오는 중...</h3>
+        <p>프로젝트 목록을 가져오고 있습니다.</p>
       </article>
     </section>
 
-    <p class="footer">필요한 프로젝트나 설명을 더 추가하고 싶으면 알려주세요.</p>
+    <p class="footer">새 리포지토리가 생기면 여기 목록도 자동으로 업데이트됩니다.</p>
   </div>
+  <script>
+    const username = 'frognation';
+    const projectsEl = document.getElementById('projects');
+    const fallbackDesc = '설명이 아직 없습니다.';
+
+    const createLink = (href, text, accent) => {
+      const a = document.createElement('a');
+      a.className = accent ? 'pill accent' : 'pill';
+      a.href = href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = text;
+      return a;
+    };
+
+    const renderProjects = (repos) => {
+      projectsEl.innerHTML = '';
+      repos.forEach((repo) => {
+        if (repo.name.toLowerCase() === `${username}.github.io`) return;
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        const title = document.createElement('h3');
+        title.textContent = repo.name;
+
+        const desc = document.createElement('p');
+        desc.textContent = repo.description || fallbackDesc;
+
+        const links = document.createElement('div');
+        links.className = 'links';
+        links.appendChild(createLink(repo.html_url, 'GitHub', true));
+
+        const liveUrl = repo.homepage || (repo.has_pages ? `https://${username}.github.io/${repo.name}` : '');
+        if (liveUrl) links.appendChild(createLink(liveUrl, '라이브 보기', false));
+
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(links);
+        projectsEl.appendChild(card);
+      });
+
+      if (!projectsEl.children.length) {
+        projectsEl.innerHTML = '<article class="card"><h3>표시할 리포지토리가 없습니다.</h3></article>';
+      }
+    };
+
+    const renderError = (message) => {
+      projectsEl.innerHTML = `<article class="card"><h3>불러오기 실패</h3><p>${message}</p></article>`;
+    };
+
+    fetch(`https://api.github.com/users/${username}/repos?per_page=100`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`GitHub API 오류: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        const sorted = data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+        renderProjects(sorted);
+      })
+      .catch((err) => {
+        renderError(err.message);
+      });
+  </script>
 </body>
 </html>
