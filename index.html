@@ -6,19 +6,15 @@
   <title>frognation · Projects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-1: #0c1a1a;
-      --bg-2: #0f1f33;
-      --card: rgba(255, 255, 255, 0.05);
-      --card-hover: rgba(255, 255, 255, 0.08);
-      --text: #e8eef2;
-      --muted: #9fb3c8;
-      --accent: #4cf3c9;
-      --accent-2: #ff8a4c;
-      --border: rgba(255, 255, 255, 0.12);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --bg: #050505;
+      --text: #f7f7f7;
+      --muted: #9a9a9a;
+      --line: #1f1f1f;
+      --accent: #94f7ff;
+      --link: #ffffff;
     }
     * { box-sizing: border-box; }
     body {
@@ -26,114 +22,131 @@
       min-height: 100vh;
       font-family: 'Manrope', system-ui, -apple-system, sans-serif;
       color: var(--text);
-      background: radial-gradient(circle at 15% 20%, rgba(76, 243, 201, 0.18), transparent 32%),
-                  radial-gradient(circle at 85% 10%, rgba(255, 138, 76, 0.22), transparent 30%),
-                  linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      background: var(--bg);
     }
     .shell {
-      width: min(1200px, 92vw);
+      width: min(960px, 92vw);
       margin: 0 auto;
-      padding: 64px 0 72px;
+      padding: 72px 0 96px;
     }
     header {
-      display: grid;
-      gap: 16px;
-      align-items: end;
-      grid-template-columns: 1fr auto;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 32px;
+      margin-bottom: 48px;
     }
     .title {
       font-family: 'Space Grotesk', 'Manrope', sans-serif;
-      font-size: clamp(32px, 4vw, 46px);
-      letter-spacing: -0.02em;
-      margin: 0;
+      font-size: clamp(36px, 5vw, 52px);
+      letter-spacing: -0.04em;
+      margin: 0 0 12px;
     }
     .subtitle {
       margin: 0;
       color: var(--muted);
-      font-size: 16px;
-      max-width: 640px;
-      line-height: 1.6;
+      font-size: 15px;
+      max-width: 520px;
+      line-height: 1.5;
     }
     .badge {
-      background: rgba(76, 243, 201, 0.1);
-      color: var(--accent);
-      border: 1px solid rgba(76, 243, 201, 0.35);
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 13px;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-    }
-    .grid {
-      margin-top: 32px;
-      display: grid;
-      gap: 18px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px 18px 16px;
-      box-shadow: var(--shadow);
-      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-      backdrop-filter: blur(6px);
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(76, 243, 201, 0.4);
-      background: var(--card-hover);
-    }
-    .card h3 {
-      margin: 0 0 10px;
-      font-family: 'Space Grotesk', 'Manrope', sans-serif;
-      letter-spacing: -0.01em;
-      font-size: 18px;
-    }
-    .card p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .links {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 13px;
+      gap: 12px;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+    .section {
+      border-top: 1px solid var(--line);
+      padding: 32px 0 8px;
+    }
+    .section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-head h2 {
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+    }
+    .project {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .project:first-child {
+      border-top: 1px solid var(--line);
+    }
+    .meta h3 {
+      margin: 0 0 6px;
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .meta p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+    .links {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .link {
+      color: var(--link);
       text-decoration: none;
-      transition: border-color 140ms ease, color 140ms ease;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 120ms ease, border-color 120ms ease;
     }
-    .pill:hover {
-      border-color: rgba(255, 255, 255, 0.35);
-      color: white;
-    }
-    .pill.accent {
-      border-color: rgba(76, 243, 201, 0.5);
+    .link:hover {
       color: var(--accent);
+      border-color: var(--accent);
+    }
+    .empty {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 16px 0 0;
     }
     .footer {
-      margin-top: 42px;
+      margin-top: 56px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       text-align: center;
     }
     @media (max-width: 720px) {
-      header {
-        grid-template-columns: 1fr;
-        align-items: start;
-      }
-      .badge {
-        width: max-content;
+      .project {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -143,26 +156,42 @@
     <header>
       <div>
         <p class="badge">frognation · project index</p>
+        <h1 class="title">Projects & Deployments</h1>
+        <p class="subtitle">A minimal directory of what is live and what is currently in the works.</p>
       </div>
     </header>
 
-    <section class="grid" id="projects">
-      <article class="card">
-        <h3>Loading...</h3>
-        <p>Fetching your repositories.</p>
-      </article>
+    <section class="section">
+      <div class="section-head">
+        <h2>Published</h2>
+        <p>Live pages and deployments</p>
+      </div>
+      <div class="list" id="published-list">
+        <p class="empty">Loading repositories…</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Repositories</h2>
+        <p>Code that is still in repo form</p>
+      </div>
+      <div class="list" id="repo-list">
+        <p class="empty">Loading repositories…</p>
+      </div>
     </section>
 
     <p class="footer">New public repos will appear automatically after you create them.</p>
   </div>
   <script>
     const username = 'frognation';
-    const projectsEl = document.getElementById('projects');
+    const publishedEl = document.getElementById('published-list');
+    const repoEl = document.getElementById('repo-list');
     const fallbackDesc = 'No description provided yet.';
 
-    const createLink = (href, text, accent) => {
+    const createLink = (href, text) => {
       const a = document.createElement('a');
-      a.className = accent ? 'pill accent' : 'pill';
+      a.className = 'link';
       a.href = href;
       a.target = '_blank';
       a.rel = 'noopener';
@@ -170,39 +199,51 @@
       return a;
     };
 
-    const renderProjects = (repos) => {
-      projectsEl.innerHTML = '';
-      repos.forEach((repo) => {
-        if (repo.name.toLowerCase() === `${username}.github.io`) return;
-        const card = document.createElement('article');
-        card.className = 'card';
+    const buildProject = (repo) => {
+      const article = document.createElement('article');
+      article.className = 'project';
 
-        const title = document.createElement('h3');
-        title.textContent = repo.name;
+      const meta = document.createElement('div');
+      meta.className = 'meta';
 
-        const desc = document.createElement('p');
-        desc.textContent = repo.description || fallbackDesc;
+      const title = document.createElement('h3');
+      title.textContent = repo.name;
 
-        const links = document.createElement('div');
-        links.className = 'links';
-        links.appendChild(createLink(repo.html_url, 'GitHub', true));
+      const desc = document.createElement('p');
+      desc.textContent = repo.description || fallbackDesc;
 
-        const liveUrl = repo.homepage || (repo.has_pages ? `https://${username}.github.io/${repo.name}/` : '');
-        if (liveUrl) links.appendChild(createLink(liveUrl, 'Live', false));
+      meta.appendChild(title);
+      meta.appendChild(desc);
 
-        card.appendChild(title);
-        card.appendChild(desc);
-        card.appendChild(links);
-        projectsEl.appendChild(card);
-      });
+      const links = document.createElement('div');
+      links.className = 'links';
+      links.appendChild(createLink(repo.html_url, 'GitHub'));
 
-      if (!projectsEl.children.length) {
-        projectsEl.innerHTML = '<article class="card"><h3>No repositories to show.</h3></article>';
+      const liveUrl = repo.homepage || (repo.has_pages ? `https://${username}.github.io/${repo.name}/` : '');
+      if (liveUrl) {
+        links.appendChild(createLink(liveUrl, 'Live'));
       }
+
+      article.appendChild(meta);
+      article.appendChild(links);
+      return article;
+    };
+
+    const renderList = (target, list, emptyState) => {
+      target.innerHTML = '';
+      if (!list.length) {
+        target.innerHTML = `<p class="empty">${emptyState}</p>`;
+        return;
+      }
+      list.forEach((repo) => {
+        target.appendChild(buildProject(repo));
+      });
     };
 
     const renderError = (message) => {
-      projectsEl.innerHTML = `<article class="card"><h3>Failed to load</h3><p>${message}</p></article>`;
+      const errorBlock = `<p class="empty">Failed to load: ${message}</p>`;
+      publishedEl.innerHTML = errorBlock;
+      repoEl.innerHTML = errorBlock;
     };
 
     fetch(`https://api.github.com/users/${username}/repos?per_page=100`)
@@ -212,7 +253,21 @@
       })
       .then((data) => {
         const sorted = data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-        renderProjects(sorted);
+        const published = [];
+        const others = [];
+
+        sorted.forEach((repo) => {
+          if (repo.name.toLowerCase() === `${username}.github.io`) return;
+          const hasLive = Boolean((repo.homepage || '').trim()) || repo.has_pages;
+          if (hasLive) {
+            published.push(repo);
+          } else {
+            others.push(repo);
+          }
+        });
+
+        renderList(publishedEl, published, 'Nothing live yet.');
+        renderList(repoEl, others, 'No additional repositories.');
       })
       .catch((err) => {
         renderError(err.message);
